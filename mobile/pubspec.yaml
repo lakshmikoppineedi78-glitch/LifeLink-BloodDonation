@@ -1,0 +1,75 @@
+name: lifelink_blood_donation
+description: LifeLink - Blood Donation Platform Mobile App
+
+publish_to: 'none'
+
+version: 1.0.0+1
+
+environment:
+  sdk: '>=2.19.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+  # UI & Navigation
+  get: ^4.6.5
+  provider: ^6.0.0
+  
+  # API & Networking
+  http: ^1.1.0
+  dio: ^5.3.0
+  
+  # Data & Storage
+  sqflite: ^2.3.0
+  path_provider: ^2.1.0
+  shared_preferences: ^2.2.0
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  
+  # Authentication
+  jwt_decoder: ^2.0.1
+  
+  # Location & Maps
+  geolocator: ^9.0.2
+  google_maps_flutter: ^2.5.0
+  geocoding: ^2.1.0
+  
+  # Notifications
+  firebase_messaging: ^14.6.0
+  firebase_core: ^2.24.0
+  
+  # Date & Time
+  intl: ^0.19.0
+  
+  # Others
+  cupertino_icons: ^1.0.2
+  flutter_svg: ^2.0.5
+  cached_network_image: ^3.3.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_linter: ^4.0.0
+
+flutter:
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/icons/
+    - assets/
+
+  fonts:
+    - family: Poppins
+      fonts:
+        - asset: assets/fonts/Poppins-Regular.ttf
+        - asset: assets/fonts/Poppins-Bold.ttf
+          weight: 700
+        - asset: assets/fonts/Poppins-SemiBold.ttf
+          weight: 600
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter-Regular.ttf
+        - asset: assets/fonts/Inter-Bold.ttf
+          weight: 700
