@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LifeLink - Blood Donation Platform</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="container">
+            <div class="navbar-brand">
+                <h1>🩸 LifeLink</h1>
+            </div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#dashboard">Dashboard</a></li>
+                <li><a href="#donors">Donors</a></li>
+                <li><a href="#requests">Requests</a></li>
+                <li><a href="#bloodbanks">Blood Banks</a></li>
+                <li><a href="#profile" class="btn-logout">Logout</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1 class="hero-title">Save Lives with LifeLink</h1>
+                <p class="hero-subtitle">Connect blood donors with those in need. Find blood faster, donate easier.</p>
+                <div class="hero-buttons">
+                    <button class="btn btn-primary" onclick="scrollToSection('dashboard')">Go to Dashboard</button>
+                    <button class="btn btn-secondary">Learn More</button>
+                </div>
+            </div>
+            <div class="hero-image">
+                <div class="blood-drop-animation">🩸</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dashboard Section -->
+    <section id="dashboard" class="dashboard">
+        <div class="container">
+            <h2>Dashboard Overview</h2>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Donors</h3>
+                    <p class="stat-number">1,245</p>
+                    <span class="stat-change">↑ 12% this month</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Active Requests</h3>
+                    <p class="stat-number">23</p>
+                    <span class="stat-change">3 Critical</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Lives Saved</h3>
+                    <p class="stat-number">3,856</p>
+                    <span class="stat-change">↑ 89 this week</span>
+                </div>
+                <div class="stat-card">
+                    <h3>Blood Banks</h3>
+                    <p class="stat-number">47</p>
+                    <span class="stat-change">Connected</span>
+                </div>
+            </div>
+
+            <!-- Charts -->
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Blood Group Distribution</h3>
+                    <div class="blood-group-bars">
+                        <div class="bar-item">
+                            <span>O+</span>
+                            <div class="bar" style="width: 35%;"></div>
+                            <span>35%</span>
+                        </div>
+                        <div class="bar-item">
+                            <span>A+</span>
+                            <div class="bar" style="width: 28%;"></div>
+                            <span>28%</span>
+                        </div>
+                        <div class="bar-item">
+                            <span>B+</span>
+                            <div class="bar" style="width: 22%;"></div>
+                            <span>22%</span>
+                        </div>
+                        <div class="bar-item">
+                            <span>AB+</span>
+                            <div class="bar" style="width: 15%;"></div>
+                            <span>15%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="chart-card">
+                    <h3>Donations This Month</h3>
+                    <div class="donation-chart">
+                        <canvas id="donationChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donors Section -->
+    <section id="donors" class="donors-section">
+        <div class="container">
+            <h2>Registered Donors</h2>
+            
+            <div class="filter-bar">
+                <input type="text" id="searchDonor" placeholder="Search by name or blood group..." class="search-input">
+                <select id="bloodGroupFilter" class="select-input">
+                    <option value="">All Blood Groups</option>
+                    <option value="O+">O+</option>
+                    <option value="O-">O-</option>
+                    <option value="A+">A+</option>
+                    <option value="A-">A-</option>
+                    <option value="B+">B+</option>
+                    <option value="B-">B-</option>
+                    <option value="AB+">AB+</option>
+                    <option value="AB-">AB-</option>
+                </select>
+                <select id="statusFilter" class="select-input">
+                    <option value="">All Status</option>
+                    <option value="eligible">Eligible</option>
+                    <option value="ineligible">Ineligible</option>
+                    <option value="donated">Recently Donated</option>
+                </select>
+            </div>
+
+            <div class="donors-grid" id="donorsGrid">
+                <!-- Donor cards will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blood Requests Section -->
+    <section id="requests" class="requests-section">
+        <div class="container">
+            <h2>Blood Requests</h2>
+            
+            <button class="btn btn-primary" onclick="openNewRequestModal()">+ New Request</button>
+
+            <div class="requests-filter">
+                <button class="filter-btn active" onclick="filterRequests('all')">All</button>
+                <button class="filter-btn" onclick="filterRequests('urgent')">Urgent</button>
+                <button class="filter-btn" onclick="filterRequests('pending')">Pending</button>
+                <button class="filter-btn" onclick="filterRequests('fulfilled')">Fulfilled</button>
+            </div>
+
+            <div class="requests-list" id="requestsList">
+                <!-- Request items will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Blood Banks Section -->
+    <section id="bloodbanks" class="bloodbanks-section">
+        <div class="container">
+            <h2>Blood Banks</h2>
+            
+            <div class="bloodbanks-grid" id="bloodbanksGrid">
+                <!-- Blood bank cards will be populated here -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal for New Request -->
+    <div id="requestModal" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeRequestModal()">&times;</span>
+            <h2>Create New Blood Request</h2>
+            <form id="newRequestForm">
+                <div class="form-group">
+                    <label>Blood Group Required</label>
+                    <select required>
+                        <option>O+</option>
+                        <option>O-</option>
+                        <option>A+</option>
+                        <option>A-</option>
+                        <option>B+</option>
+                        <option>B-</option>
+                        <option>AB+</option>
+                        <option>AB-</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Units Required</label>
+                    <input type="number" min="1" required>
+                </div>
+                <div class="form-group">
+                    <label>Patient Name</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Hospital/Location</label>
+                    <input type="text" required>
+                </div>
+                <div class="form-group">
+                    <label>Urgency</label>
+                    <select required>
+                        <option>Critical</option>
+                        <option>Urgent</option>
+                        <option>Normal</option>
+                    </select>
+                </div>
+                <button type="submit" class="btn btn-primary">Create Request</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>🩸 LifeLink</h4>
+                    <p>Saving lives through blood donation</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <ul>
+                        <li><a href="#home">Home</a></li>
+                        <li><a href="#dashboard">Dashboard</a></li>
+                        <li><a href="#donors">Donors</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact</h4>
+                    <p>Email: info@lifelink.com</p>
+                    <p>Phone: +1 (555) 123-4567</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 LifeLink. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
